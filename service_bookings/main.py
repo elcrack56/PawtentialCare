@@ -2,6 +2,7 @@ import pika
 import json
 from fastapi import FastAPI, HTTPException
 import schemas
+from typing import List
 
 app = FastAPI(title="Microservicio: Reservas")
 
@@ -49,3 +50,7 @@ def get_booking(booking_id: int):
     if booking_id not in bookings_db:
         raise HTTPException(status_code=404, detail="Booking not found")
     return bookings_db[booking_id]
+
+@app.get("/api/bookings", response_model=List[schemas.Booking])
+def get_all_bookings():
+    return list(bookings_db.values())
