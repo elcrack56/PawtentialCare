@@ -59,3 +59,7 @@ def create_pet(pet_in: schemas.PetBase):
     users_db[owner_id].pets.append(new_pet)
     
     return new_pet
+
+@app.get("/api/pets", response_model=List[schemas.Pet])
+def get_all_pets():
+    return list(pets_db.values())
