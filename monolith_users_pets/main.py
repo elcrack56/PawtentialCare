@@ -9,7 +9,7 @@ user_id_counter = 0
 def create_user(user_in: schemas.UserCreate):
     global user_id_counter
     for user in users_db.values():
-        if user.id == user_in.email:  
+        if user.email == user_in.email:  
             raise HTTPException(status_code=400, detail="Email already registered")
 
     user_id_counter += 1
